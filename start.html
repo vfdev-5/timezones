@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>World Timezones</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+    <script src="http://widget.time.is/en.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/controller.js"></script>
+
+</head>
+
+<body>
+
+<noscript>
+    <div id="jsWarning" class="pageMessage">Please enable <u>JAVASCRIPT</u> for this page to work properly.</div>
+</noscript>
+
+<div class="container" ng-app="App">
+
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="images/index.png">
+            </a>
+        </div>
+    </nav>
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h1>
+                <a href="http://time.is/UTC" id="time_is_link">Time zones</a>
+            </h1>
+        </div>
+
+
+        <div class="panel-body"
+             ng-controller="Controller as vm">
+
+            <div class="container-fluid">
+
+                <div class="row tz" ng-repeat="(key, tz) in vm.timezones">
+                    <div class="col-xs-4 col-md-4">
+                        <b>{{tz.label}}</b> ({{tz.country}}) <span class="label label-primary">{{tz.info}}</span>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <span id="{{tz.code}}"></span>
+                    </div>
+                    <div class="col-xs-5 col-md-5">
+                        <div ng-class="{'horizontal-scroll-master hours-with-scroll': key==0, 'hours-without-scroll horizontal-scroll-slave': key>0}">
+
+                            <button ng-class="{'btn btn-default hour day': item.hours > 7 && item.hours < 20, 'btn btn-default hour night': item.hours <= 7 || item.hours >= 20}"
+                                    ng-repeat="item in tz.timespan track by $index">
+                                <b>{{item.hours}}</b>
+                                <p ng-show="item.hours == 0 || item.hours == 23"
+                                   class="">
+                                    <i>{{item.day}}/{{item.month}}</i>
+                                </p>
+                            </button>
+                        </div>
+                    </div>
+            </div>
+
+            <!--<table class="table table-striped">-->
+                <!--<tr ng-repeat="tz in vm.timezones">-->
+                    <!--<td>-->
+                        <!--<b>{{tz.label}}</b> ({{tz.country}}) <span class="label label-default">{{tz.info}}</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span id="{{tz.code}}"></span>-->
+                    <!--</td>-->
+                    <!--<td class="scrollable">-->
+                        <!--<button class="btn btn-default" ng-repeat="hour in tz.hours">-->
+                            <!--{{hour}}-->
+                        <!--</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+
+.tz {
+  margin: 10px;
+  background-color: #ddd;
+}
+
+.hour {
+    width: 50px;
+    height: 50px;
+}
+
+.day {
+   background-color: white;
+   color: black;
+}
+
+.night {
+   background-color: black;
+   color: white;
+}
+
+
+.hours-with-scroll {
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hours-without-scroll {
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
