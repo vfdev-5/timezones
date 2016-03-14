@@ -15,7 +15,6 @@
                         var master = element.find('.horizontal-scroll-master');
                         var slave = element.find('.horizontal-scroll-slave');
                         master.on('scroll', function(){
-                            console.log("Scroll -->");
                             scrollSlave(master, slave);
                         });
                    }
@@ -40,7 +39,7 @@
         time_is_widget.init(twObject);
         setInterval(updateTimeGrid, 1000);
         var timeGridInitialized=false;
-        vm.hoursCount=48;
+        vm.hoursCount=148;
 
         angular.element(document).ready(function () {
             setupScrollSync();
@@ -67,6 +66,7 @@
             // Use JQuery to get value from <span id=''>
             for (var tz in vm.timezones) {
 //                var text = $('#' + vm.timezones[tz].code).text();
+                // text = "09:26:18 | Monday 14/03/2016"
                 var text = angular.element(document).find('#' + vm.timezones[tz].code).text();
                 console.log('span \'' + '#' + vm.timezones[tz].code + '\' value=' + text);
 
@@ -77,13 +77,15 @@
                 var start_hour = parseInt(text.substring(0,2));
                 var res = text.match(/(\d+)\/(\d+)\/(\d+)/); // res[0] = 11/03/2016, res[1]=11, res[2]=03, res[3]=2016
                 var day = new Date(res[3], res[2]-1, res[1], start_hour, 0, 0, 0);
-                vm.timezones[tz]['timespan'] = [{'hours': start_hour, 'day': day.getDate(), 'month': day.getMonth()+1}];
+                // getDay() Returns the day of the week (from 0-6)
+                vm.timezones[tz]['timespan'] = [{'hours': day.getHours(), 'day': day.getDate(), 'month': day.getMonth()+1, 'is_weekend': day.getDay() < 1 || day.getDay() > 5}];
                 for (var h=1; h<vm.hoursCount; h++) {
                     day.setHours(day.getHours()+1);
                     vm.timezones[tz]['timespan'].push({
                         'hours': day.getHours(),
                         'day': day.getDate(),
                         'month': day.getMonth()+1,
+                        'is_weekend': day.getDay() < 1 || day.getDay() > 5,
                     });
                 }
             }
@@ -108,6 +110,7 @@
                         'hours': day.getHours(),
                         'day': day.getDate(),
                         'month': day.getMonth()+1,
+                        'is_weekend': day.getDay() < 1 || day.getDay() > 5,
                     });
                 }
             }

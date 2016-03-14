@@ -1,22 +1,48 @@
 
 .tz {
-  margin: 10px;
+  margin: 20px;
   background-color: #ddd;
 }
 
 .hour {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
 }
 
 .day {
-   background-color: white;
+   background-color: #bdd7ee;
    color: black;
 }
 
 .night {
-   background-color: black;
+   background-color: #8497b0;
    color: white;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.day-weekend {
+    background-color: #c5e0b4;
+    color: black;
+}
+
+.night-weekend {
+    background-color: #548235;
+    color: white;
+}
+
+.night .gray {
+    color: lightgray;
+}
+
+.night-weekend .gray {
+    color: lightgray;
 }
 
 
